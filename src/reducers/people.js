@@ -28,11 +28,20 @@ const initialState = {
 export default function browse(state = initialState, action) {
   switch (action.type) {
 
-    // this is an example
-    case types.DO_NOTHING:
-      return state;
+    case types.FILTER_VALUE:
+      state.people = initialState.people;
+      state.filterQuery = action.payload;
 
-    // ...
+      const newState = {
+        people: state.people.filter(human => {
+          const regex = new RegExp(state.filterQuery, "gi");
+          return human.name.match(regex)
+        }),
+        
+        filterQuery: state.filterQuery
+      }
+
+    return newState
 
     default:
       return state;

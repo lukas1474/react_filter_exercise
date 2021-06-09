@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-// ...
 
 class People extends Component {
   static propTypes = {
@@ -11,7 +8,7 @@ class People extends Component {
   };
 
   renderList = () => {
-    return this.props.people.map(human => (
+    return this.props.people && this.props.people.map(human => (
        <div className='App-box' key={human.id}>
         {human.name}
       </div>
@@ -31,8 +28,4 @@ const mapStateToProps = (state) => ({
   people: state.people.people,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  // ...
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(People);
+export default connect(mapStateToProps)(People);
